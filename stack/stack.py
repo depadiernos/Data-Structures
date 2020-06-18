@@ -60,3 +60,7 @@ class Stack:
         self.storage.remove_head()
         self.size = self.size -1
         return value
+
+"""
+Main difference between implementations is that you can use the length method to get the size of the array, while in the LL, you have to manually keep track. And because stack and queue mostly deal with the ends of the list, the LL methods work conveniently as opposed to using a slice in one instance.
+"""
