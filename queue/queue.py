@@ -30,8 +30,7 @@ class Queue:
     def dequeue(self):
         if len(self.storage) < 1:
             return None
-        value = self.storage[:1][0]
-        self.storage = self.storage[1:]
+        value = self.storage.pop(0)
         self.size = self.size -1
         return value
 """
