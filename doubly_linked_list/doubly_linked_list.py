@@ -64,7 +64,6 @@ class DoublyLinkedList:
         if not self.head:
             return None
         elif not self.head.next:
-            self.head.delete()
             self.head = None
             self.tail = None
             self.length -= 1
@@ -94,7 +93,6 @@ class DoublyLinkedList:
         if not self.tail:
             return None
         elif not self.tail.prev:
-            self.tail.delete()
             self.head = None
             self.tail = None
             self.length -= 1
@@ -107,28 +105,26 @@ class DoublyLinkedList:
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
     def move_to_front(self, node):
-        if node == self.tail:
-            self.tail = self.tail.prev
         if node == self.head:
             return
-        new_head = node
-        node.delete()
-        new_head.next = self.head
-        self.head.prev = new_head
-        self.head = new_head
+        if node == self.tail:
+            self.tail = self.tail.prev
+        node.prev = None
+        node.next = self.head
+        self.head.prev = node
+        self.head = node
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new tail node of the List."""
     def move_to_end(self, node):
         if node == self.tail:
             return
-        new_tail = node
-        if new_tail == self.head:
+        if node == self.head:
             self.head = self.head.next
-        new_tail.next = None
-        new_tail.prev = self.tail
-        self.tail.next = new_tail
-        self.tail = new_tail
+        node.next = None
+        node.prev = self.tail
+        self.tail.next = node
+        self.tail = node
      
 
     """Removes a node from the list and handles cases where
