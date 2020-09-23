@@ -10,16 +10,57 @@ return elements in Last In First Out order.
 3. What is the difference between using an array vs. a linked list when 
    implementing a Stack?
 """
+"""
 class Stack:
     def __init__(self):
         self.size = 0
         # self.storage = ?
+        self.storage = []
 
     def __len__(self):
-        pass
+        return self.size
 
     def push(self, value):
-        pass
+        self.storage.append(value)
+        self.size = self.size + 1
+        return value
 
     def pop(self):
-        pass
+        if self.size < 1:
+            return None
+        value = self.storage[-1]
+        self.storage.pop(-1)
+        self.size = self.size -1
+        return value
+"""
+
+import singly_linked_list
+
+LinkedList = singly_linked_list.LinkedList
+Node = singly_linked_list.Node
+
+class Stack:
+    def __init__(self):
+        self.size = 0
+        # self.storage = ?
+        self.storage = LinkedList()
+
+    def __len__(self):
+        return self.size
+
+    def push(self, value):
+        self.storage.add_to_head(value)
+        self.size +=  1
+        return value
+
+    def pop(self):
+        if self.size < 1:
+            return None
+        value = self.storage.head.value
+        self.storage.remove_head()
+        self.size -= 1
+        return value
+
+"""
+Main difference between implementations is that you can use the length method to get the size of the array, while in the LL, you have to manually keep track. And because stack and queue mostly deal with the ends of the list, the LL methods work conveniently as opposed to using a slice in one instance.
+"""
